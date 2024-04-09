@@ -1,0 +1,10 @@
+server:
+  port: 8081
+  undertow:
+    threads:
+      worker: 10
+      io: 2
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
