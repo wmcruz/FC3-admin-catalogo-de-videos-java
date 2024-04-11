@@ -31,6 +31,10 @@ public class Category extends AggregateRoot<CategoryID> implements Cloneable {
         return new Category(id, aName, aDescription, aIsActive, now, now, deletedAt);
     }
 
+    public static Category with(final CategoryID anId, final String aName, final String aDescription, final boolean isActive, final Instant aCreationDate, final Instant aUpdateDate, final Instant aDeleteDate) {
+        return new Category(anId, aName, aDescription, isActive, aCreationDate, aUpdateDate, aDeleteDate);
+    }
+
     @Override
     public void validate(final ValidationHandler handler) {
         new CategoryValidator(this, handler).validate();
