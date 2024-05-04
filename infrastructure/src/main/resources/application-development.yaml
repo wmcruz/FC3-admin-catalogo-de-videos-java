@@ -14,3 +14,6 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
+  flyway:
+    enabled: true
+    clean-disabled: false
