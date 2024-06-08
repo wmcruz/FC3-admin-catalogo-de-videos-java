@@ -3,13 +3,12 @@ package com.fullcycle.admin.catalogo.application.category.create;
 import com.fullcycle.admin.catalogo.domain.category.Category;
 import com.fullcycle.admin.catalogo.domain.category.CategoryGateway;
 import com.fullcycle.admin.catalogo.domain.validation.handler.Notification;
-import com.fullcycle.admin.catalogo.domain.validation.handler.ThrowsValidationHandler;
-import io.vavr.API;
 import io.vavr.control.Either;
 
 import java.util.Objects;
 
-import static io.vavr.API.*;
+import static io.vavr.API.Left;
+import static io.vavr.API.Try;
 
 public class DefaultCreateCategoryUseCase extends CreateCategoryUseCase {
 
