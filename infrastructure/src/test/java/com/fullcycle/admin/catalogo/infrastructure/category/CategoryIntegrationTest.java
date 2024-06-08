@@ -3,7 +3,7 @@ package com.fullcycle.admin.catalogo.infrastructure.category;
 import com.fullcycle.admin.catalogo.domain.category.Category;
 import com.fullcycle.admin.catalogo.domain.category.CategoryID;
 import com.fullcycle.admin.catalogo.domain.category.CategorySearchQuery;
-import com.fullcycle.admin.catalogo.infrastructure.MySQLGatewayTest;
+import com.fullcycle.admin.catalogo.IntegrationTest;
 import com.fullcycle.admin.catalogo.infrastructure.category.persistence.CategoryJpaEntity;
 import com.fullcycle.admin.catalogo.infrastructure.category.persistence.CategoryRepository;
 import org.junit.jupiter.api.Assertions;
@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@MySQLGatewayTest
-public class CategoryMySQLGatewayTest {
+@IntegrationTest
+public class CategoryIntegrationTest {
 
     @Autowired
     private CategoryMySQLGateway categoryGateway;
