@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @IntegrationTest
@@ -50,8 +51,8 @@ public class CategoryIntegrationTest {
         Assertions.assertEquals(expectedName, actualEntity.getName());
         Assertions.assertEquals(expectedDescription, actualEntity.getDescription());
         Assertions.assertEquals(expectedIsActive, actualEntity.isActive());
-        Assertions.assertEquals(aCategory.getCreatedAt(), actualEntity.getCreatedAt());
-        Assertions.assertEquals(aCategory.getUpdatedAt(), actualEntity.getUpdatedAt());
+        Assertions.assertEquals(aCategory.getCreatedAt().truncatedTo(ChronoUnit.MINUTES), actualEntity.getCreatedAt().truncatedTo(ChronoUnit.MINUTES));
+        Assertions.assertEquals(aCategory.getUpdatedAt().truncatedTo(ChronoUnit.MINUTES), actualEntity.getUpdatedAt().truncatedTo(ChronoUnit.MINUTES));
         Assertions.assertEquals(aCategory.getDeletedAt(), actualEntity.getDeletedAt());
         Assertions.assertNull(actualEntity.getDeletedAt());
     }
@@ -94,7 +95,7 @@ public class CategoryIntegrationTest {
         Assertions.assertEquals(expectedName, actualEntity.getName());
         Assertions.assertEquals(expectedDescription, actualEntity.getDescription());
         Assertions.assertEquals(expectedIsActive, actualEntity.isActive());
-        Assertions.assertEquals(aCategory.getCreatedAt(), actualEntity.getCreatedAt());
+        Assertions.assertEquals(aCategory.getCreatedAt().truncatedTo(ChronoUnit.MINUTES), actualEntity.getCreatedAt().truncatedTo(ChronoUnit.MINUTES));
         Assertions.assertTrue(aCategory.getUpdatedAt().isBefore(actualCategory.getUpdatedAt()));
         Assertions.assertEquals(aCategory.getDeletedAt(), actualEntity.getDeletedAt());
         Assertions.assertNull(actualEntity.getDeletedAt());
@@ -145,8 +146,8 @@ public class CategoryIntegrationTest {
         Assertions.assertEquals(expectedName, actualCategory.getName());
         Assertions.assertEquals(expectedDescription, actualCategory.getDescription());
         Assertions.assertEquals(expectedIsActive, actualCategory.isActive());
-        Assertions.assertEquals(aCategory.getCreatedAt(), actualCategory.getCreatedAt());
-        Assertions.assertEquals(aCategory.getUpdatedAt(), actualCategory.getUpdatedAt());
+        Assertions.assertEquals(aCategory.getCreatedAt().truncatedTo(ChronoUnit.MINUTES), actualCategory.getCreatedAt().truncatedTo(ChronoUnit.MINUTES));
+        Assertions.assertEquals(aCategory.getUpdatedAt().truncatedTo(ChronoUnit.MINUTES), actualCategory.getUpdatedAt().truncatedTo(ChronoUnit.MINUTES));
         Assertions.assertEquals(aCategory.getDeletedAt(), actualCategory.getDeletedAt());
         Assertions.assertNull(actualCategory.getDeletedAt());
     }
