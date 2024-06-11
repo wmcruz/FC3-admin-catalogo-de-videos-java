@@ -46,7 +46,6 @@ public class CreateCategoryUseCaseIT {
         assertEquals(expectedDescription, actualCategory.getDescription());
         assertEquals(expectedIsActive, actualCategory.isActive());
         assertNotNull(actualCategory.getCreatedAt());
-        assertNotNull(actualCategory.getCreatedAt());
         assertNotNull(actualCategory.getUpdatedAt());
         assertNull(actualCategory.getDeletedAt());
     }
