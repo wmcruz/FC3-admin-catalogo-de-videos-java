@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fullcycle.admin.catalogo.ControllerTest;
 import com.fullcycle.admin.catalogo.application.category.create.CreateCategoryOutput;
 import com.fullcycle.admin.catalogo.application.category.create.CreateCategoryUseCase;
-import com.fullcycle.admin.catalogo.domain.category.CategoryID;
 import com.fullcycle.admin.catalogo.infrastructure.category.models.CreateCategoryApiInput;
 import io.vavr.API;
 import org.junit.jupiter.api.Test;
@@ -17,13 +16,13 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Objects;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ControllerTest(controllers = CategoryAPI.class)
 public class CategoryAPITest {
@@ -46,7 +45,7 @@ public class CategoryAPITest {
         final var aInput = new CreateCategoryApiInput(expectedName, expectedDescription, expectedIsActive);
 
         Mockito.when(useCase.execute(ArgumentMatchers.any()))
-                .thenReturn(API.Right(CreateCategoryOutput.from(CategoryID.from("123"))));
+                .thenReturn(API.Right(CreateCategoryOutput.from("123")));
 
         final var request = post("/categories")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -56,7 +55,9 @@ public class CategoryAPITest {
                 .andDo(print())
                 .andExpectAll(
                         status().isCreated(),
-                        header().string("Location", "/categories/123")
+                        header().string("Location", "/categories/123"),
+                        header().string("Content-Type", MediaType.APPLICATION_JSON_VALUE),
+                        jsonPath("$.id", equalTo("123"))
                 );
 
         verify(useCase, times(1)).execute(argThat(cmd ->
