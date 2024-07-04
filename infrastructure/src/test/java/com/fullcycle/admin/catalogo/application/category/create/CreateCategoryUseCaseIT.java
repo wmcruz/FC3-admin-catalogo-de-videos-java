@@ -9,7 +9,9 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 
 @IntegrationTest
@@ -105,7 +107,7 @@ public class CreateCategoryUseCaseIT {
         final var aCommand = CreateCategoryCommand.with(expectedName, expectedDescription, expectedIsActive);
 
         Mockito.doThrow(new IllegalStateException("Gateway error"))
-                        .when(categoryGateway).create(any());
+                .when(categoryGateway).create(any());
 
         final var notification = useCase.execute(aCommand).getLeft();
 
