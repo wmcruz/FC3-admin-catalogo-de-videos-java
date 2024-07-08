@@ -1,9 +1,10 @@
 package com.fullcycle.admin.catalogo.infrastructure.api;
 
 import com.fullcycle.admin.catalogo.domain.pagination.Pagination;
-import com.fullcycle.admin.catalogo.infrastructure.category.models.CategoryApiOutput;
-import com.fullcycle.admin.catalogo.infrastructure.category.models.CreateCategoryApiInput;
-import com.fullcycle.admin.catalogo.infrastructure.category.models.UpdateCategoryApiInput;
+import com.fullcycle.admin.catalogo.infrastructure.category.models.CategoryListResponse;
+import com.fullcycle.admin.catalogo.infrastructure.category.models.CategoryResponse;
+import com.fullcycle.admin.catalogo.infrastructure.category.models.CreateCategoryRequest;
+import com.fullcycle.admin.catalogo.infrastructure.category.models.UpdateCategoryRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -35,7 +36,7 @@ public interface CategoryAPI {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    ResponseEntity<?> createCategory(@RequestBody CreateCategoryApiInput input);
+    ResponseEntity<?> createCategory(@RequestBody CreateCategoryRequest input);
 
     @Operation(summary = "List all categories paginated")
     @ApiResponses(value = {
@@ -44,7 +45,7 @@ public interface CategoryAPI {
             @ApiResponse(responseCode = "500", description = "An internal server error was thrown")
     })
     @GetMapping
-    Pagination<?> listCategories(
+    Pagination<CategoryListResponse> listCategories(
             @RequestParam(name = "search", required = false, defaultValue = "") final String search,
             @RequestParam(name = "page", required = false, defaultValue = "0") final int page,
             @RequestParam(name = "perPage", required = false, defaultValue = "10") final int perPage,
@@ -62,7 +63,7 @@ public interface CategoryAPI {
             value = "{id}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    CategoryApiOutput getById(@PathVariable(name = "id") String id);
+    CategoryResponse getById(@PathVariable(name = "id") String id);
 
     @Operation(summary = "Update a category by it's identifier")
     @ApiResponses(value = {
@@ -74,7 +75,7 @@ public interface CategoryAPI {
             value = "{id}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    ResponseEntity<?> updateById(@PathVariable(name = "id") String id, @RequestBody UpdateCategoryApiInput input);
+    ResponseEntity<?> updateById(@PathVariable(name = "id") String id, @RequestBody UpdateCategoryRequest input);
 
     @Operation(summary = "Delete a category by it's identifier")
     @ApiResponses(value = {
