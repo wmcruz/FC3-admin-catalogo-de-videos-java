@@ -3,19 +3,19 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath('org.flywaydb:flyway-mysql:10.11.0')
+        classpath('org.flywaydb:flyway-mysql:8.5.10')
     }
 }
 
 plugins {
     id 'java'
     id 'application' // PERMITE AO GRADLE EXECUTAR O PROJETO COMO UM JAVA APP
-    id 'org.springframework.boot' version '3.2.7'
-    id 'io.spring.dependency-management' version '1.1.4'
-    id 'org.flywaydb.flyway' version '10.11.0'
+    id 'org.springframework.boot' version '2.6.15'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.flywaydb.flyway' version '8.5.10'
 }
 
-group = 'com.fullcycle.admin.catalogo.infrastructure'
+group 'com.fullcycle.admin.catalogo.infrastructure'
 version '1.0-SNAPSHOT'
 
 bootJar {
@@ -41,11 +41,15 @@ dependencies {
     implementation('mysql:mysql-connector-java:8.0.33')
     implementation('com.fasterxml.jackson.module:jackson-module-afterburner')
 
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-api:2.5.0'
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+    implementation('org.springdoc:springdoc-openapi-webmvc-core:1.6.8')
+    implementation('org.springdoc:springdoc-openapi-ui:1.6.8')
 
     testImplementation('org.flywaydb:flyway-core')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+    testImplementation('org.testcontainers:testcontainers:1.17.2')
+    testImplementation('org.testcontainers:mysql:1.17.2')
+    testImplementation('org.testcontainers:junit-jupiter:1.17.2')
 
     testRuntimeOnly('com.h2database:h2')
 }
