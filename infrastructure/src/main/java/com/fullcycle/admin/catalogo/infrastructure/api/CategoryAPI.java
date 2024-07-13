@@ -73,6 +73,7 @@ public interface CategoryAPI {
     })
     @PutMapping(
             value = "{id}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     ResponseEntity<?> updateById(@PathVariable(name = "id") String id, @RequestBody UpdateCategoryRequest input);
@@ -88,7 +89,6 @@ public interface CategoryAPI {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteById(@PathVariable(name = "id") String id);
 }
