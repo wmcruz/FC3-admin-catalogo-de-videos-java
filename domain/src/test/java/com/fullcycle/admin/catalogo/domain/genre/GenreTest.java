@@ -1,7 +1,6 @@
 package com.fullcycle.admin.catalogo.domain.genre;
 
-import com.fullcycle.admin.catalogo.domain.exceptions.DomainException;
-import com.fullcycle.admin.catalogo.domain.validation.handler.ThrowsValidationHandler;
+import com.fullcycle.admin.catalogo.domain.exceptions.NotificationException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,13 +30,11 @@ public class GenreTest {
     public void givenAInvalidNullName_whenCallNewGenreAndValidate_shouldReceiveAError() {
         final String expectedName = null;
         final var expectedIsActive = true;
-        final var expectedErrorCount = 0;
+        final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'name' should not be null";
 
-        final var actualGenre = Genre.newGenre(expectedName, expectedIsActive);
-
-        final var actualException = assertThrows(DomainException.class, () -> {
-            actualGenre.validate(new ThrowsValidationHandler());
+        final var actualException = assertThrows(NotificationException.class, () -> {
+            Genre.newGenre(expectedName, expectedIsActive);
         });
 
         assertEquals(expectedErrorCount, actualException.getErrors().size());
@@ -48,13 +45,11 @@ public class GenreTest {
     public void givenAInvalidEmptyName_whenCallNewGenreAndValidate_shouldReceiveAError() {
         final String expectedName = " ";
         final var expectedIsActive = true;
-        final var expectedErrorCount = 0;
+        final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'name' should not be empty";
 
-        final var actualGenre = Genre.newGenre(expectedName, expectedIsActive);
-
-        final var actualException = assertThrows(DomainException.class, () -> {
-            actualGenre.validate(new ThrowsValidationHandler());
+        final var actualException = assertThrows(NotificationException.class, () -> {
+            Genre.newGenre(expectedName, expectedIsActive);
         });
 
         assertEquals(expectedErrorCount, actualException.getErrors().size());
@@ -67,13 +62,11 @@ public class GenreTest {
                 "A certificação de metodologias que nos auxiliam a lidar com o desenvolvimento contínuo de distintas formas de atuação prepara-nos para enfrentar situações atípicas decorrentes dos procedimentos normalmente adotados. " +
                 "As experiências acumuladas demonstram que a constante divulgação das informações ainda não demonstrou convincentemente que vai participar na mudança do sistema de formação de quadros que corresponde às necessidades.";
         final var expectedIsActive = true;
-        final var expectedErrorCount = 0;
-        final var expectedErrorMessage = "'name' must be beteween 1 and 255 carcters";
+        final var expectedErrorCount = 1;
+        final var expectedErrorMessage = "'name' must be between 1 and 255 caracters";
 
-        final var actualGenre = Genre.newGenre(expectedName, expectedIsActive);
-
-        final var actualException = assertThrows(DomainException.class, () -> {
-            actualGenre.validate(new ThrowsValidationHandler());
+        final var actualException = assertThrows(NotificationException.class, () -> {
+            Genre.newGenre(expectedName, expectedIsActive);
         });
 
         assertEquals(expectedErrorCount, actualException.getErrors().size());
