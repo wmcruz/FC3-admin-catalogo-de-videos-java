@@ -3,8 +3,8 @@ package com.fullcycle.admin.catalogo.infrastructure.category;
 import com.fullcycle.admin.catalogo.domain.category.Category;
 import com.fullcycle.admin.catalogo.domain.category.CategoryGateway;
 import com.fullcycle.admin.catalogo.domain.category.CategoryID;
-import com.fullcycle.admin.catalogo.domain.pagination.SearchQuery;
 import com.fullcycle.admin.catalogo.domain.pagination.Pagination;
+import com.fullcycle.admin.catalogo.domain.pagination.SearchQuery;
 import com.fullcycle.admin.catalogo.infrastructure.category.persistence.CategoryJpaEntity;
 import com.fullcycle.admin.catalogo.infrastructure.category.persistence.CategoryRepository;
 import com.fullcycle.admin.catalogo.infrastructure.utils.SpecificationsUtils;
@@ -13,6 +13,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -58,8 +60,8 @@ public class CategoryMySQLGateway implements CategoryGateway {
                 .filter(str -> !str.isBlank())
                 .map(str ->
                         SpecificationsUtils.
-                        <CategoryJpaEntity>like("name", str)
-                        .or(SpecificationsUtils.like("description", str))
+                                <CategoryJpaEntity>like("name", str)
+                                .or(SpecificationsUtils.like("description", str))
                 )
                 .orElse(null);
 
@@ -77,5 +79,11 @@ public class CategoryMySQLGateway implements CategoryGateway {
     public void deleteById(final CategoryID anId) {
         final String anIdValue = anId.getValue();
         if (this.repository.existsById(anIdValue)) this.repository.deleteById(anIdValue);
+    }
+
+    @Override
+    public List<CategoryID> existsByIds(final Iterable<CategoryID> ids) {
+        // TODO: Implementar quando chegar na camada de infraestrutura de genre
+        return Collections.emptyList();
     }
 }
