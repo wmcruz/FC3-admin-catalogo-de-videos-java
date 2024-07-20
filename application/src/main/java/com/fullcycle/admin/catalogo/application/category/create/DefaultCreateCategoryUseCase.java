@@ -10,8 +10,6 @@ import java.util.Objects;
 import static io.vavr.API.Left;
 import static io.vavr.API.Try;
 
-import io.vavr.control.Either;
-
 public class DefaultCreateCategoryUseCase extends CreateCategoryUseCase {
 
     private final CategoryGateway categoryGateway;
