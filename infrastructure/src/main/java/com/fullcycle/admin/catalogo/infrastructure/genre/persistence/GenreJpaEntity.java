@@ -6,10 +6,12 @@ import com.fullcycle.admin.catalogo.domain.genre.GenreID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static javax.persistence.CascadeType.ALL;
@@ -19,6 +21,7 @@ import static javax.persistence.FetchType.EAGER;
 @Table(name = "genres")
 public class GenreJpaEntity {
 
+    @Id
     @Column(name = "id", nullable = false)
     private String id;
 
@@ -43,7 +46,7 @@ public class GenreJpaEntity {
     public GenreJpaEntity() {
     }
 
-    public GenreJpaEntity(final String anId, final String aName, final boolean isActive, final Instant aCreatedAt, final Instant aUpdatedAt, final Instant aDeletedAt) {
+    private GenreJpaEntity(final String anId, final String aName, final boolean isActive, final Instant aCreatedAt, final Instant aUpdatedAt, final Instant aDeletedAt) {
         this.id = anId;
         this.name = aName;
         this.active = isActive;
@@ -66,9 +69,7 @@ public class GenreJpaEntity {
                 GenreID.from(getId()),
                 getName(),
                 isActive(),
-                getCategories().stream()
-                        .map(it -> CategoryID.from(it.getId().getCategoryId()))
-                        .toList(),
+                getCategoryIDs(),
                 getCreatedAt(),
                 getUpdatedAt(),
                 getDeletedAt()
@@ -105,6 +106,12 @@ public class GenreJpaEntity {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public List<CategoryID> getCategoryIDs() {
+        return categories.stream()
+                .map(it -> CategoryID.from(it.getId().getCategoryId()))
+                .toList();
     }
 
     public Set<GenreCategoryJpaEntity> getCategories() {
