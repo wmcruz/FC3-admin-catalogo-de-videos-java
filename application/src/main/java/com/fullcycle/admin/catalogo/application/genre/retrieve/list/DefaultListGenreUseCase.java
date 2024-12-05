@@ -6,7 +6,7 @@ import com.fullcycle.admin.catalogo.domain.pagination.SearchQuery;
 
 import java.util.Objects;
 
-public class DefaultListGenreUseCase extends ListeGenreUseCase {
+public class DefaultListGenreUseCase extends ListGenreUseCase {
 
     private final GenreGateway genreGateway;
 
