@@ -61,7 +61,7 @@ public class CategoryTest {
     public void givenAnInvalidNameLengthLessThan3_whenCallNewCategoryAnValidate_thenShouldReceivedError() {
         final var expectedName = "Fi ";
         final var expectedErrorCount = 1;
-        final var expectedErrorMessage = "'name' must be between 3 and 255 caracters";
+        final var expectedErrorMessage = "'name' must be between 3 and 255 characters";
         final var expectedDescription = "A categoria mais assistida";
         final var expectedIsActive = true;
 
@@ -79,7 +79,7 @@ public class CategoryTest {
                 "A certificação de metodologias que nos auxiliam a lidar com o desenvolvimento contínuo de distintas formas de atuação prepara-nos para enfrentar situações atípicas decorrentes dos procedimentos normalmente adotados. " +
                 "As experiências acumuladas demonstram que a constante divulgação das informações ainda não demonstrou convincentemente que vai participar na mudança do sistema de formação de quadros que corresponde às necessidades.";
         final var expectedErrorCount = 1;
-        final var expectedErrorMessage = "'name' must be between 3 and 255 caracters";
+        final var expectedErrorMessage = "'name' must be between 3 and 255 characters";
         final var expectedDescription = "A categoria mais assistida";
         final var expectedIsActive = true;
 

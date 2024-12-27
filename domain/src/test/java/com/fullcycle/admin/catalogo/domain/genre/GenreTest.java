@@ -70,7 +70,7 @@ public class GenreTest {
                 "As experiências acumuladas demonstram que a constante divulgação das informações ainda não demonstrou convincentemente que vai participar na mudança do sistema de formação de quadros que corresponde às necessidades.";
         final var expectedIsActive = true;
         final var expectedErrorCount = 1;
-        final var expectedErrorMessage = "'name' must be between 1 and 255 caracters";
+        final var expectedErrorMessage = "'name' must be between 1 and 255 characters";
 
         final var actualException = assertThrows(NotificationException.class, () -> {
             Genre.newGenre(expectedName, expectedIsActive);
