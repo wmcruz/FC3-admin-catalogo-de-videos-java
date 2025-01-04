@@ -40,6 +40,7 @@ dependencies {
     implementation('io.vavr:vavr:0.10.4')
     implementation('mysql:mysql-connector-java')
     implementation('com.fasterxml.jackson.module:jackson-module-afterburner')
+    implementation 'com.github.javafaker:javafaker:1.0.2'
 
     implementation('org.springdoc:springdoc-openapi-webmvc-core:1.6.8')
     implementation('org.springdoc:springdoc-openapi-ui:1.6.8')

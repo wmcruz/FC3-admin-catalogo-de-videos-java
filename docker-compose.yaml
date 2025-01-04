@@ -1,9 +1,7 @@
-version: '3.7'
-
 services:
   mysql:
     container_name: adm_videos_mysql
-    image: mysql:latest
+    image: mysql:8.3.0
     environment:
       - MYSQL_DATABASE=adm_videos
       - MYSQL_ROOT_PASSWORD=123456
