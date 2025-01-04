@@ -1,23 +1,58 @@
 package com.fullcycle.admin.catalogo.infrastructure.castmember;
 
+import com.fullcycle.admin.catalogo.Fixture;
 import com.fullcycle.admin.catalogo.MySQLGatewayTest;
+import com.fullcycle.admin.catalogo.domain.castmember.CastMember;
 import com.fullcycle.admin.catalogo.infrastructure.castmember.persistence.CastMemberRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @MySQLGatewayTest
 public class CastMemberMySQLGatewayTest {
 
     @Autowired
-    private CastMemberMySQLGateway castMemberMySQLGateway;
+    private CastMemberMySQLGateway castMemberGateway;
 
     @Autowired
     private CastMemberRepository castMemberRepository;
 
     @Test
     public void testDependencies() {
-        Assertions.assertNotNull(castMemberMySQLGateway);
+        Assertions.assertNotNull(castMemberGateway);
         Assertions.assertNotNull(castMemberRepository);
+    }
+
+    @Test
+    public void givenAValidCastMember_whenCallCreate_shouldPersistIt() {
+        // given
+        final var expectedName = Fixture.name();
+        final var expectedType = Fixture.CastMember.type();
+
+        final var aMember = CastMember.newMember(expectedName, expectedType);
+        final var expectedId = aMember.getId();
+
+        assertEquals(0, castMemberRepository.count());
+
+        // when
+        final var actualMember = castMemberGateway.create(CastMember.with(aMember));
+
+        // then
+        assertEquals(1, castMemberRepository.count());
+
+        assertEquals(expectedId, actualMember.getId());
+        assertEquals(expectedName, actualMember.getName());
+        assertEquals(expectedType, actualMember.getType());
+        assertEquals(aMember.getCreatedAt(), actualMember.getCreatedAt());
+        assertEquals(aMember.getUpdatedAt(), actualMember.getUpdatedAt());
+
+        final var persistMember = castMemberRepository.findById(expectedId.getValue()).get();
+        assertEquals(expectedId.getValue(), persistMember.getId());
+        assertEquals(expectedName, persistMember.getName());
+        assertEquals(expectedType, persistMember.getType());
+        assertEquals(aMember.getCreatedAt(), persistMember.getCreatedAt());
+        assertEquals(aMember.getUpdatedAt(), persistMember.getUpdatedAt());
     }
 }

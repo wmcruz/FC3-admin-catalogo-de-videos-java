@@ -5,6 +5,7 @@ import com.fullcycle.admin.catalogo.domain.castmember.CastMemberGateway;
 import com.fullcycle.admin.catalogo.domain.castmember.CastMemberID;
 import com.fullcycle.admin.catalogo.domain.pagination.Pagination;
 import com.fullcycle.admin.catalogo.domain.pagination.SearchQuery;
+import com.fullcycle.admin.catalogo.infrastructure.castmember.persistence.CastMemberJpaEntity;
 import com.fullcycle.admin.catalogo.infrastructure.castmember.persistence.CastMemberRepository;
 import org.springframework.stereotype.Component;
 
@@ -21,9 +22,8 @@ public class CastMemberMySQLGateway implements CastMemberGateway {
     }
 
     @Override
-
-    public CastMember create(final CastMember aGenre) {
-        return null;
+    public CastMember create(final CastMember aMember) {
+        return save(aMember);
     }
 
     @Override
@@ -37,12 +37,17 @@ public class CastMemberMySQLGateway implements CastMemberGateway {
     }
 
     @Override
-    public CastMember update(final CastMember aGenre) {
+    public CastMember update(final CastMember aMember) {
         return null;
     }
 
     @Override
     public Pagination<CastMember> findAll(final SearchQuery aQuery) {
         return null;
+    }
+
+    private CastMember save(final CastMember aMember) {
+        return this.castMemberRepository.save(CastMemberJpaEntity.from(aMember))
+                .toAggregate();
     }
 }
