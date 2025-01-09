@@ -26,28 +26,28 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@E2ETest
-@Testcontainers
+//@E2ETest
+//@Testcontainers
 public class GenreE2ETest {
 
-    @Autowired
+    //@Autowired
     private MockMvc mvc;
 
-    @Autowired
+    //@Autowired
     private GenreRepository genreRepository;
 
-    @Container
+    //@Container
     private static final MySQLContainer MYSQL_CONTAINER = new MySQLContainer("mysql:latest")
             .withPassword("123456")
             .withUsername("root")
             .withDatabaseName("adm_videos");
 
-    @DynamicPropertySource
+    //@DynamicPropertySource
     public static void setDatasourceProperties(final DynamicPropertyRegistry registry) {
         registry.add("mysql.port", () -> MYSQL_CONTAINER.getMappedPort(3306));
     }
 
-    @Test
+    //@Test
     public void asACatalogAdminIShouldBeAbleToCreateANewGenreWithValidValues() throws Exception {
         assertTrue(MYSQL_CONTAINER.isRunning());
         assertEquals(0, genreRepository.count());

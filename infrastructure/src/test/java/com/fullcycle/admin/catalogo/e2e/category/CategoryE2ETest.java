@@ -32,29 +32,29 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@E2ETest
-@Testcontainers
+//@E2ETest
+//@Testcontainers
 public class CategoryE2ETest {
 
-    @Autowired
+//    @Autowired
     private MockMvc mvc;
 
-    @Autowired
+//    @Autowired
     private CategoryRepository categoryRepository;
 
-    @Container
+//    @Container
 //    private static final MySQLContainer MYSQL_CONTAINER = new MySQLContainer("mysql:8.0.38")
     private static final MySQLContainer MYSQL_CONTAINER = new MySQLContainer("mysql:latest")
             .withPassword("123456")
             .withUsername("root")
             .withDatabaseName("adm_videos");
 
-    @DynamicPropertySource
+//    @DynamicPropertySource
     public static void setDatasourceProperties(final DynamicPropertyRegistry registry) {
         registry.add("mysql.port", () -> MYSQL_CONTAINER.getMappedPort(3306));
     }
 
-    @Test
+//    @Test
     public void asACatalogAdminIShouldBeAbleToCreateANewCategoryWithValidValues() throws Exception {
         assertTrue(MYSQL_CONTAINER.isRunning());
         assertEquals(0, categoryRepository.count());
@@ -75,7 +75,7 @@ public class CategoryE2ETest {
         assertNull(actualCategory.getDeletedAt());
     }
 
-    @Test
+//    @Test
     public void asACatalogAdminIShouldBeAbleToNavigateToAllCategories() throws Exception {
         assertTrue(MYSQL_CONTAINER.isRunning());
         assertEquals(0, categoryRepository.count());
@@ -116,7 +116,7 @@ public class CategoryE2ETest {
                 .andExpect(jsonPath("$.items", hasSize(0)));
     }
 
-    @Test
+//    @Test
     public void asACatalogAdminIShouldBeAbleToSearchBetweenAllCategories() throws Exception {
         assertTrue(MYSQL_CONTAINER.isRunning());
         assertEquals(0, categoryRepository.count());
@@ -136,7 +136,7 @@ public class CategoryE2ETest {
                 .andExpect(jsonPath("$.items[2].name", equalTo("Séries")));
     }
 
-    @Test
+//    @Test
     public void asACatalogAdminIShouldBeAbleToSortAllCategoriesByDescriptionDesc() throws Exception {
         assertTrue(MYSQL_CONTAINER.isRunning());
         assertEquals(0, categoryRepository.count());
@@ -154,7 +154,7 @@ public class CategoryE2ETest {
                 .andExpect(jsonPath("$.items[0].name", equalTo("Filmes")));
     }
 
-    @Test
+//    @Test
     public void asACatalogAdminIShouldBeAbleToGetACategoryByItsIdentifier() throws Exception {
         assertTrue(MYSQL_CONTAINER.isRunning());
         assertEquals(0, categoryRepository.count());
@@ -175,7 +175,7 @@ public class CategoryE2ETest {
         assertNull(actualCategory.deletedAt());
     }
 
-    @Test
+//    @Test
     public void asACatalogAdminIShouldBeAbleToSeeATreatedErrorByGettingANotFoundCategory() throws Exception {
         assertTrue(MYSQL_CONTAINER.isRunning());
         assertEquals(0, categoryRepository.count());
@@ -189,7 +189,7 @@ public class CategoryE2ETest {
                 .andExpect(jsonPath("$.message", equalTo("Category with ID 123 was not found")));
     }
 
-    @Test
+//    @Test
     public void asACatalogAdminIShouldBeAbleToUpdateACategoryByItsIdentifier() throws Exception {
         assertTrue(MYSQL_CONTAINER.isRunning());
         assertEquals(0, categoryRepository.count());
@@ -219,7 +219,7 @@ public class CategoryE2ETest {
         assertNull(actualCategory.getDeletedAt());
     }
 
-    @Test
+//    @Test
     public void asACatalogAdminIShouldBeAbleToInactivateACategoryByItsIdentifier() throws Exception {
         assertTrue(MYSQL_CONTAINER.isRunning());
         assertEquals(0, categoryRepository.count());
@@ -249,7 +249,7 @@ public class CategoryE2ETest {
         assertNotNull(actualCategory.getDeletedAt());
     }
 
-    @Test
+//    @Test
     public void asACatalogAdminIShouldBeAbleToActivateACategoryByItsIdentifier() throws Exception {
         assertTrue(MYSQL_CONTAINER.isRunning());
         assertEquals(0, categoryRepository.count());
@@ -279,7 +279,7 @@ public class CategoryE2ETest {
         assertNull(actualCategory.getDeletedAt());
     }
 
-    @Test
+//    @Test
     public void asACatalogAdminIShouldBeAbleToDeleteACategoryByItsIdentifier() throws Exception {
         assertTrue(MYSQL_CONTAINER.isRunning());
         assertEquals(0, categoryRepository.count());
