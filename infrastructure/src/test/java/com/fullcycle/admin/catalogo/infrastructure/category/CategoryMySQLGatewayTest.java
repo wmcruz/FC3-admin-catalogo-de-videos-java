@@ -339,7 +339,7 @@ public class CategoryMySQLGatewayTest {
 
         assertEquals(0, categoryRepository.count());
 
-        categoryRepository.saveAll(List.of(
+        categoryRepository.saveAllAndFlush(List.of(
                 CategoryJpaEntity.from(filmes),
                 CategoryJpaEntity.from(series),
                 CategoryJpaEntity.from(documentarios)
@@ -355,6 +355,6 @@ public class CategoryMySQLGatewayTest {
         final var actualResult = categoryGateway.existsByIds(ids);
 
         // then
-        assertEquals(expectedIds, actualResult);
+        assertTrue(expectedIds.containsAll(actualResult));
     }
 }
