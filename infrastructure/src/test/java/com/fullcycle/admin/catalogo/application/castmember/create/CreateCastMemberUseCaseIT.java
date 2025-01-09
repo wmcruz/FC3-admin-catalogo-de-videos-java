@@ -21,7 +21,7 @@ import static org.mockito.Mockito.verify;
 public class CreateCastMemberUseCaseIT {
 
     @Autowired
-    private DefaultCreateCastMemberUseCase useCase;
+    private CreateCastMemberUseCase useCase;
 
     @Autowired
     private CastMemberRepository castMemberRepository;
