@@ -78,16 +78,13 @@ public interface GenreAPI {
     })
     ResponseEntity<?> updateById(@PathVariable(name = "id") String id, @RequestBody UpdateGenreRequest input);
 
-    @DeleteMapping(
-            value = "{id}",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
+    @DeleteMapping(value = "{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete a genre by it's identifier")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Genre deleted successfuly"),
             @ApiResponse(responseCode = "404", description = "Genre was not found"),
             @ApiResponse(responseCode = "500", description = "An internal server error was thrown")
     })
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteById(@PathVariable(name = "id") String id);
 }

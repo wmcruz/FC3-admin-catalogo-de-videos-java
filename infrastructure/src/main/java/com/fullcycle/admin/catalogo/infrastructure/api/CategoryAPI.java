@@ -78,17 +78,13 @@ public interface CategoryAPI {
     )
     ResponseEntity<?> updateById(@PathVariable(name = "id") String id, @RequestBody UpdateCategoryRequest input);
 
+    @DeleteMapping(value = "{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete a category by it's identifier")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Category deleted successfuly"),
             @ApiResponse(responseCode = "404", description = "Category was not found"),
             @ApiResponse(responseCode = "500", description = "An internal server error was thrown")
     })
-    @DeleteMapping(
-            value = "{id}",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteById(@PathVariable(name = "id") String id);
 }
