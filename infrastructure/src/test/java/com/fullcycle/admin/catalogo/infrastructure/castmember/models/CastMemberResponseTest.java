@@ -10,7 +10,7 @@ import org.springframework.boot.test.json.JacksonTester;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @JacksonTest
-class CastMemberResponseTest {
+public class CastMemberResponseTest {
 
     @Autowired
     private JacksonTester<CastMemberResponse> json;
