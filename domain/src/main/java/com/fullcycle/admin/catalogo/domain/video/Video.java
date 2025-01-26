@@ -39,7 +39,7 @@ public class Video extends AggregateRoot<VideoID> {
     private Set<GenreID> genres;
     private Set<CastMemberID> castMembers;
 
-    protected Video(
+    private Video(
             final VideoID anId,
             final String aTitle,
             final String aDescription,
