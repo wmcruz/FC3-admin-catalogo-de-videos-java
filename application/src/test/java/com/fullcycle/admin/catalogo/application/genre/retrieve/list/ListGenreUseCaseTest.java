@@ -9,15 +9,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class ListGenreUseCaseTest extends UseCaseTest {
 
@@ -66,12 +66,12 @@ public class ListGenreUseCaseTest extends UseCaseTest {
         final var actualOutput = useCase.execute(aQuery);
 
         // then
-        Assertions.assertEquals(expectedPage, actualOutput.currentPage());
-        Assertions.assertEquals(expectedPerPage, actualOutput.perPage());
-        Assertions.assertEquals(expectedTotal, actualOutput.total());
-        Assertions.assertEquals(expectedItems, actualOutput.items());
+        assertEquals(expectedPage, actualOutput.currentPage());
+        assertEquals(expectedPerPage, actualOutput.perPage());
+        assertEquals(expectedTotal, actualOutput.total());
+        assertEquals(expectedItems, actualOutput.items());
 
-        Mockito.verify(genreGateway, times(1)).findAll(eq(aQuery));
+        verify(genreGateway, times(1)).findAll(eq(aQuery));
     }
 
     @Test
@@ -103,12 +103,12 @@ public class ListGenreUseCaseTest extends UseCaseTest {
         final var actualOutput = useCase.execute(aQuery);
 
         // then
-        Assertions.assertEquals(expectedPage, actualOutput.currentPage());
-        Assertions.assertEquals(expectedPerPage, actualOutput.perPage());
-        Assertions.assertEquals(expectedTotal, actualOutput.total());
-        Assertions.assertEquals(expectedItems, actualOutput.items());
+        assertEquals(expectedPage, actualOutput.currentPage());
+        assertEquals(expectedPerPage, actualOutput.perPage());
+        assertEquals(expectedTotal, actualOutput.total());
+        assertEquals(expectedItems, actualOutput.items());
 
-        Mockito.verify(genreGateway, times(1)).findAll(eq(aQuery));
+        verify(genreGateway, times(1)).findAll(eq(aQuery));
     }
 
     @Test
@@ -133,8 +133,8 @@ public class ListGenreUseCaseTest extends UseCaseTest {
         });
 
         // then
-        Assertions.assertEquals(expectedErrorMessage, actualOutput.getMessage());
+        assertEquals(expectedErrorMessage, actualOutput.getMessage());
 
-        Mockito.verify(genreGateway, times(1)).findAll(eq(aQuery));
+        verify(genreGateway, times(1)).findAll(eq(aQuery));
     }
 }
