@@ -6,7 +6,6 @@ import com.fullcycle.admin.catalogo.domain.category.CategoryID;
 import com.fullcycle.admin.catalogo.domain.genre.GenreID;
 import com.fullcycle.admin.catalogo.domain.utils.InstantUtils;
 import com.fullcycle.admin.catalogo.domain.validation.ValidationHandler;
-import com.fullcycle.admin.catalogo.domain.validation.Validator;
 
 import java.time.Instant;
 import java.time.Year;
@@ -265,7 +264,7 @@ public class Video extends AggregateRoot<VideoID> {
     }
 
     public Optional<AudioVideoMedia> getVideo() {
-        return Optional.ofNullable(video);
+        return Optional.ofNullable(this.video);
     }
 
     private void setCategories(final Set<CategoryID> categories) {
