@@ -10,6 +10,7 @@ import com.fullcycle.admin.catalogo.domain.exceptions.InternalErrorException;
 import com.fullcycle.admin.catalogo.domain.exceptions.NotificationException;
 import com.fullcycle.admin.catalogo.domain.genre.GenreGateway;
 import com.fullcycle.admin.catalogo.domain.genre.GenreID;
+import com.fullcycle.admin.catalogo.domain.utils.IdUtils;
 import com.fullcycle.admin.catalogo.domain.video.AudioVideoMedia;
 import com.fullcycle.admin.catalogo.domain.video.ImageMedia;
 import com.fullcycle.admin.catalogo.domain.video.MediaResourceGateway;
@@ -27,7 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -1025,7 +1025,7 @@ public class CreateVideoUseCaseTest extends UseCaseTest {
         when(mediaResourceGateway.storeImage(any(), any()))
                 .thenAnswer(t -> {
                     final var resource = t.getArgument(1, Resource.class);
-                    return ImageMedia.with(UUID.randomUUID().toString(), resource.name(), "/img");
+                    return ImageMedia.with(IdUtils.uuid(), resource.name(), "/img");
                 });
     }
 
@@ -1033,7 +1033,7 @@ public class CreateVideoUseCaseTest extends UseCaseTest {
         when(mediaResourceGateway.storeAudioVideo(any(), any()))
                 .thenAnswer(t -> {
                     final var resource = t.getArgument(1, Resource.class);
-                    return AudioVideoMedia.with(UUID.randomUUID().toString(), resource.name(), "/img", "", MediaStatus.PENDING);
+                    return AudioVideoMedia.with(IdUtils.uuid(), resource.name(), "/img", "", MediaStatus.PENDING);
                 });
     }
 }
