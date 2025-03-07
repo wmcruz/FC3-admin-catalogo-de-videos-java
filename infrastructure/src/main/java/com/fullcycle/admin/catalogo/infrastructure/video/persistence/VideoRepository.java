@@ -12,17 +12,17 @@ import java.util.Set;
 public interface VideoRepository extends JpaRepository<VideoJpaEntity, String> {
 
     @Query("""
-            SELECT NEW com.fullcyle.admin.catalogo.domain.video.VideoPreview(
+            SELECT NEW com.fullcycle.admin.catalogo.domain.video.VideoPreview(
                 v.id AS id,
                 v.title AS title,
                 v.description AS description,
                 v.createdAt AS createdAt,
-                v.updatedAt AS updatedAt 
+                v.updatedAt AS updatedAt
             )
             FROM Video v
-                join v.castMembers members
-                join v.categories categories
-                join v.genres genres
+                LEFT JOIN v.castMembers members
+                LEFT JOIN v.categories categories
+                LEFT JOIN v.genres genres
             WHERE
                 (:terms IS NULL OR UPPER(v.title) LIKE :terms)
             AND
