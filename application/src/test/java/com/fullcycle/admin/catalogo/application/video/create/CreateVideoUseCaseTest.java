@@ -1,7 +1,7 @@
 package com.fullcycle.admin.catalogo.application.video.create;
 
-import com.fullcycle.admin.catalogo.application.Fixture;
 import com.fullcycle.admin.catalogo.application.UseCaseTest;
+import com.fullcycle.admin.catalogo.domain.Fixture;
 import com.fullcycle.admin.catalogo.domain.castmember.CastMemberGateway;
 import com.fullcycle.admin.catalogo.domain.castmember.CastMemberID;
 import com.fullcycle.admin.catalogo.domain.category.CategoryGateway;

@@ -1,7 +1,7 @@
 package com.fullcycle.admin.catalogo.infrastructure.castmember.models;
 
-import com.fullcycle.admin.catalogo.Fixture;
 import com.fullcycle.admin.catalogo.JacksonTest;
+import com.fullcycle.admin.catalogo.domain.Fixture;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.json.JacksonTester;
@@ -17,7 +17,7 @@ public class UpdateCastMemberRequestTest {
     @Test
     public void testUnmarshall() throws Exception {
         final var expectedName = Fixture.name();
-        final var expectedType = Fixture.CastMember.type();
+        final var expectedType = Fixture.CastMembers.type();
 
         final var json = """
                 {
