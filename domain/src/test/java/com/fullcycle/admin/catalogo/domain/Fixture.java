@@ -64,18 +64,28 @@ public final class Fixture {
     public static final class Categories {
 
         private static final Category AULAS = Category.newCategory("Aulas", "Some description", true);
+        private static final Category LIVES = Category.newCategory("Lives", "Some description", true);
 
         public static Category aulas() {
             return AULAS.clone();
+        }
+
+        public static Category lives() {
+            return LIVES.clone();
         }
     }
 
     public static final class Genres {
 
         private static final Genre TECH = Genre.newGenre("Technology", true);
+        private static final Genre BUSINESS = Genre.newGenre("Business", true);
 
         public static Genre tech() {
             return Genre.with(TECH);
+        }
+
+        public static Genre business() {
+            return Genre.with(BUSINESS);
         }
     }
 
