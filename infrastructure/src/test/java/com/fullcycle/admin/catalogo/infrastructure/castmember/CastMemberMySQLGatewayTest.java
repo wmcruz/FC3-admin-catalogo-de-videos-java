@@ -102,6 +102,26 @@ public class CastMemberMySQLGatewayTest {
     }
 
     @Test
+    public void givenTwoCastMembersAndOnePersisted_whenCallsExistsIds_shouldPersistID() {
+        // given
+        final var aMember = CastMember.newMember("Vind", CastMemberType.DIRECTOR);
+
+        final var expectedItems = 1;
+        final var expectedId = aMember.getId();
+
+        assertEquals(0, castMemberRepository.count());
+
+        castMemberRepository.saveAndFlush(CastMemberJpaEntity.from(aMember));
+
+        // when
+        final var actualMember = castMemberGateway.existsByIds(List.of(CastMemberID.from("123"), expectedId));
+
+        // then
+        assertEquals(expectedItems, actualMember.size());
+        assertEquals(expectedId.getValue(), actualMember.get(0).getValue());
+    }
+
+    @Test
     public void givenAValidCastMember_whenCallsDeleteById_shouldDeletedIt() {
         // given
         final var aMember = CastMember.newMember(Fixture.name(), Fixture.CastMembers.type());
