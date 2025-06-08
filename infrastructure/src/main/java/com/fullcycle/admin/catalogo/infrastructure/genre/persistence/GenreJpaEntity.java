@@ -17,7 +17,7 @@ import java.util.Set;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
 
-@Entity
+@Entity(name = "Genre")
 @Table(name = "genres")
 public class GenreJpaEntity {
 
