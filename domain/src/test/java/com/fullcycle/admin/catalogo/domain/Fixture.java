@@ -4,10 +4,13 @@ import com.fullcycle.admin.catalogo.domain.castmember.CastMember;
 import com.fullcycle.admin.catalogo.domain.castmember.CastMemberType;
 import com.fullcycle.admin.catalogo.domain.category.Category;
 import com.fullcycle.admin.catalogo.domain.genre.Genre;
+import com.fullcycle.admin.catalogo.domain.resource.Resource;
+import com.fullcycle.admin.catalogo.domain.utils.IdUtils;
+import com.fullcycle.admin.catalogo.domain.video.AudioVideoMedia;
+import com.fullcycle.admin.catalogo.domain.video.ImageMedia;
 import com.fullcycle.admin.catalogo.domain.video.Rating;
-import com.fullcycle.admin.catalogo.domain.video.Resource;
-import com.fullcycle.admin.catalogo.domain.video.Resource.Type;
 import com.fullcycle.admin.catalogo.domain.video.Video;
+import com.fullcycle.admin.catalogo.domain.video.VideoMediaType;
 import com.github.javafaker.Faker;
 
 import java.time.Year;
@@ -32,6 +35,10 @@ public final class Fixture {
                 "Title 2",
                 "Title 3"
         );
+    }
+
+    public static String checksum() {
+        return "03fe62de";
     }
 
     public static Video video() {
@@ -128,21 +135,40 @@ public final class Fixture {
             return FAKER.options().option(Rating.values());
         }
 
-        public static Resource resource(final Type type) {
+        public static Resource resource(final VideoMediaType type) {
             final String contentType = Match(type).of(
-                    Case($(List(Type.VIDEO, Type.TRAILER)::contains), "video/mp4"),
+                    Case($(List(VideoMediaType.VIDEO, VideoMediaType.TRAILER)::contains), "video/mp4"),
                     Case($(), "image/png")
             );
 
+            final String checksum = IdUtils.uuid();
             final byte[] content = "Conteudo".getBytes();
 
-            return Resource.with(content, contentType, type.name().toLowerCase(), type);
+            return Resource.with(checksum, content, contentType, type.name().toLowerCase());
         }
 
         public static String description() {
             return FAKER.options().option(
                     " Caros amigos, a hegemonia do ambiente político facilita a criação do retorno esperado a longo prazo. A nível organizacional, o julgamento imparcial das eventualidades representa uma abertura para a melhoria das diretrizes de desenvolvimento para o futuro. Assim mesmo, a contínua expansão de nossa atividade exige a precisão e a definição do sistema de participação geral. Neste sentido, a consulta aos diversos militantes assume importantes posições no estabelecimento da gestão inovadora da qual fazemos parte.",
                     "Não obstante, o novo modelo estrutural aqui preconizado garante a contribuição de um grupo importante na determinação das novas proposições. A prática cotidiana prova que a valorização de fatores subjetivos apresenta tendências no sentido de aprovar a manutenção das direções preferenciais no sentido do progresso. Nunca é demais lembrar o peso e o significado destes problemas, uma vez que a constante divulgação das informações deve passar por modificações independentemente dos índices pretendidos. O incentivo ao avanço tecnológico, assim como a competitividade nas transações comerciais oferece uma interessante oportunidade para verificação das formas de ação."
+            );
+        }
+
+        public static AudioVideoMedia audioVideo(final VideoMediaType type) {
+            final var checksum = Fixture.checksum();
+            return AudioVideoMedia.with(
+                    checksum,
+                    type.name().toLowerCase(),
+                    "/videos/" + checksum
+            );
+        }
+
+        public static ImageMedia image(final VideoMediaType type) {
+            final var checksum = Fixture.checksum();
+            return ImageMedia.with(
+                    checksum,
+                    type.name().toLowerCase(),
+                    "/images/" + checksum
             );
         }
     }
