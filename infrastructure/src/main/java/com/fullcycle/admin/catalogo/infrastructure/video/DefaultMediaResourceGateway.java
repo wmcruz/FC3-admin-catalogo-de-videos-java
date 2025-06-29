@@ -45,7 +45,7 @@ public class DefaultMediaResourceGateway implements MediaResourceGateway {
     }
 
     @Override
-    public void cleanResources(final VideoID anId) {
+    public void clearResources(final VideoID anId) {
         final var ids = this.storageService.list(folder(anId));
         this.storageService.deleteAll(ids);
     }

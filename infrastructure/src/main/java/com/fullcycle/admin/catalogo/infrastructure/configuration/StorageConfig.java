@@ -21,18 +21,18 @@ public class StorageConfig {
         return new StorageProperties();
     }
 
-    @Bean(name = "storageService")
-    @Profile({"development", "production"})
-    public StorageService gcStorageService(
+    @Bean
+    @Profile({"production", "development"})
+    public StorageService gcStorageAPI(
             final GoogleStorageProperties props,
             final Storage storage
     ) {
         return new GCStorageService(props.getBucket(), storage);
     }
 
-    @Bean(name = "storageService")
+    @Bean
     @ConditionalOnMissingBean
-    public StorageService gcStorageService() {
+    public StorageService localStorageAPI() {
         return new InMemoryStorageService();
     }
 }

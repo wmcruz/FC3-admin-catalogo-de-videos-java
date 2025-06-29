@@ -119,7 +119,7 @@ public class DefaultCreateVideoUseCase extends CreateVideoUseCase {
                             .setThumbnail(aThumbnailMedia)
                             .setThumbnailHalf(aThumbHalfMedia));
         } catch (final Throwable throwable) {
-            this.mediaResourceGateway.cleanResources(anId);
+            this.mediaResourceGateway.clearResources(anId);
             throw InternalErrorException.with("An error on create video was observed [videoId: %s]".formatted(anId.getValue()), throwable);
         }
     }

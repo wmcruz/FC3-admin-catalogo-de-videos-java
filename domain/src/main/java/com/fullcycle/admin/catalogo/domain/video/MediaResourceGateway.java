@@ -6,5 +6,5 @@ public interface MediaResourceGateway {
 
     ImageMedia storeImage(VideoID anId, VideoResource aResource);
 
-    void cleanResources(VideoID anId);
+    void clearResources(VideoID anId);
 }

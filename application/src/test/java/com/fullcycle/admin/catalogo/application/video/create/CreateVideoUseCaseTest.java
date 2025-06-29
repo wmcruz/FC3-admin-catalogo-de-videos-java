@@ -1017,7 +1017,7 @@ public class CreateVideoUseCaseTest extends UseCaseTest {
         assertNotNull(actualResult);
         assertTrue(actualResult.getMessage().startsWith(expectedErrorMessage));
 
-        verify(mediaResourceGateway).cleanResources(any());
+        verify(mediaResourceGateway).clearResources(any());
     }
 
     private void mockImageMedia() {

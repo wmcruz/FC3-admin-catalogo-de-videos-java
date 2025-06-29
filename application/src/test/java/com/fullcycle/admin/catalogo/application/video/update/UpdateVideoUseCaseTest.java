@@ -1130,7 +1130,7 @@ public class UpdateVideoUseCaseTest extends UseCaseTest {
         assertNotNull(actualResult);
         assertTrue(actualResult.getMessage().startsWith(expectedErrorMessage));
 
-        verify(mediaResourceGateway, times(0)).cleanResources(any());
+        verify(mediaResourceGateway, times(0)).clearResources(any());
     }
 
     private void mockImageMedia() {
