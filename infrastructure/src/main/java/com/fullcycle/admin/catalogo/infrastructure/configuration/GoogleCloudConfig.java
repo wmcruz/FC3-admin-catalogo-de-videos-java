@@ -1,7 +1,7 @@
 package com.fullcycle.admin.catalogo.infrastructure.configuration;
 
-import com.fullcycle.admin.catalogo.infrastructure.configuration.properties.GoogleCloudProperties;
-import com.fullcycle.admin.catalogo.infrastructure.configuration.properties.GoogleStorageProperties;
+import com.fullcycle.admin.catalogo.infrastructure.configuration.properties.google.GoogleCloudProperties;
+import com.fullcycle.admin.catalogo.infrastructure.configuration.properties.google.GoogleStorageProperties;
 import com.google.api.gax.retrying.RetrySettings;
 import com.google.auth.Credentials;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -29,7 +29,7 @@ public class GoogleCloudConfig {
     }
 
     @Bean
-    @ConfigurationProperties("google.cloud.storage.catalogo-video")
+    @ConfigurationProperties("google.cloud.storage.catalogo-videos")
     public GoogleStorageProperties googleStorageProperties() {
         return new GoogleStorageProperties();
     }
