@@ -45,7 +45,9 @@ public class GetMediaUseCaseTest extends UseCaseTest {
         final var actualResult = this.useCase.execute(aCmd);
 
         // then
-        assertEquals(expectedResource, actualResult);
+        assertEquals(expectedResource.name(), actualResult.name());
+        assertEquals(expectedResource.content(), actualResult.content());
+        assertEquals(expectedResource.contentType(), actualResult.contentType());
     }
 
     @Test
@@ -53,7 +55,6 @@ public class GetMediaUseCaseTest extends UseCaseTest {
         // given
         final var expectedId = VideoID.unique();
         final var expectedType = Fixture.Videos.mediaType();
-        final var expectedResource = Fixture.Videos.resource(expectedType);
 
         when(mediaResourceGateway.getResource(expectedId, expectedType))
                 .thenReturn(Optional.empty());
@@ -64,5 +65,22 @@ public class GetMediaUseCaseTest extends UseCaseTest {
         assertThrows(NotFoundException.class, () -> {
             this.useCase.execute(aCmd);
         });
+    }
+
+    @Test
+    public void givenVideoIdAndType_whenTypeDoesntExists_shouldReturnNotFoundException() {
+        // given
+        final var expectedId = VideoID.unique();
+        final var expectedErrorMessage = "Media type QUALQUER doesn't exists";
+
+        final var aCmd = GetMediaCommand.with(expectedId.getValue(), "QUALQUER");
+
+        // when
+        final var actualException = assertThrows(NotFoundException.class, () -> {
+            this.useCase.execute(aCmd);
+        });
+
+        // then
+        assertEquals(expectedErrorMessage, actualException.getMessage());
     }
 }
