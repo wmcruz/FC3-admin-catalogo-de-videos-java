@@ -31,9 +31,13 @@ public class GCStorageService implements StorageService {
     }
 
     @Override
-    public Optional<Resource> get(final String name) {
-        return Optional.ofNullable(this.storage.get(this.bucket, name))
-                .map(blob -> Resource.with(blob.getCrc32cToHexString(), blob.getContent(), blob.getContentType(), blob.getName()));
+    public Optional<Resource> get(final String id) {
+        return Optional.ofNullable(this.storage.get(this.bucket, id))
+                .map(blob -> Resource.with(
+                        blob.getCrc32cToHexString(),
+                        blob.getContent(),
+                        blob.getContentType(),
+                        blob.getName()));
     }
 
     @Override

@@ -85,19 +85,14 @@ public class GCStorageServiceTest {
 
     @Test
     public void givenInvalidResource_whenCallsGet_shouldBeEmpty() {
-        // given
-        final var expectedName = IdUtils.uuid();
-        final var expectedResource = Fixture.Videos.resource(VideoMediaType.VIDEO);
+        final var expectedResource = Fixture.Videos.resource(VideoMediaType.THUMBNAIL);
+        final var expectedId = expectedResource.name();
 
-        doReturn(null).when(storage).get(anyString(), anyString());
+        doReturn(null).when(storage).get(eq(bucket), eq(expectedId));
 
-        // when
-        final var actualResource = this.target.get(expectedName);
+        final var actualContent = target.get(expectedId);
 
-        // then
-        verify(storage, times(1)).get(eq(this.bucket), eq(expectedName));
-
-        assertTrue(actualResource.isEmpty());
+        assertTrue(actualContent.isEmpty());
     }
 
     @Test

@@ -37,8 +37,8 @@ public class InMemoryStorageService implements StorageService {
     }
 
     @Override
-    public Optional<Resource> get(final String name) {
-        return Optional.ofNullable(this.storage.get(name));
+    public Optional<Resource> get(final String id) {
+        return Optional.ofNullable(this.storage.get(id));
     }
 
     @Override

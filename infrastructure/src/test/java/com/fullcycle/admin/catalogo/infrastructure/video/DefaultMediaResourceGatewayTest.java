@@ -19,6 +19,7 @@ import static com.fullcycle.admin.catalogo.domain.Fixture.Videos.mediaType;
 import static com.fullcycle.admin.catalogo.domain.Fixture.Videos.resource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @IntegrationTest
 class DefaultMediaResourceGatewayTest {
@@ -91,6 +92,45 @@ class DefaultMediaResourceGatewayTest {
         final var actualStored = storageService().storage().get(expectedLocation);
 
         assertEquals(expectedResource, actualStored);
+    }
+
+    @Test
+    public void givenValidVideoId_whenCallsGetReource_shouldReturnIt() {
+        // given
+        final var videoOne = VideoID.unique();
+        final var expectedType = VideoMediaType.VIDEO;
+        final var expectedResource = resource(expectedType);
+
+        storageService().store("videoId-%s/type-%s".formatted(videoOne.getValue(), expectedType), expectedResource);
+        storageService().store("videoId-%s/type-%s".formatted(videoOne.getValue(), VideoMediaType.TRAILER.name()), resource(mediaType()));
+        storageService().store("videoId-%s/type-%s".formatted(videoOne.getValue(), VideoMediaType.BANNER.name()), resource(mediaType()));
+
+        assertEquals(3, storageService().storage().size());
+
+        // when
+        final var actualResult = this.mediaResourceGateway.getResource(videoOne, expectedType).get();
+
+        // then
+        assertEquals(expectedResource, actualResult);
+    }
+
+    @Test
+    public void givenInvalidType_whenCallsGetReource_shouldReturnEmpty() {
+        // given
+        final var videoOne = VideoID.unique();
+        final var expectedType = VideoMediaType.THUMBNAIL;
+
+        storageService().store("videoId-%s/type-%s".formatted(videoOne.getValue(), VideoMediaType.VIDEO.name()), resource(mediaType()));
+        storageService().store("videoId-%s/type-%s".formatted(videoOne.getValue(), VideoMediaType.TRAILER.name()), resource(mediaType()));
+        storageService().store("videoId-%s/type-%s".formatted(videoOne.getValue(), VideoMediaType.BANNER.name()), resource(mediaType()));
+
+        assertEquals(3, storageService().storage().size());
+
+        // when
+        final var actualResult = this.mediaResourceGateway.getResource(videoOne, expectedType);
+
+        // then
+        assertTrue(actualResult.isEmpty());
     }
 
     @Test

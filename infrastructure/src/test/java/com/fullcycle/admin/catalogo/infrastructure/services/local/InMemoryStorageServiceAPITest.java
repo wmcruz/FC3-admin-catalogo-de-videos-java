@@ -11,9 +11,10 @@ import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class InMemoryStorageServiceTest {
+public class InMemoryStorageServiceAPITest {
     private InMemoryStorageService target = new InMemoryStorageService();
 
     @BeforeEach
@@ -37,16 +38,31 @@ public class InMemoryStorageServiceTest {
     @Test
     public void givenValidResource_whenCallsGet_shouldRetrieveIt() {
         // given
-        final var expectedName = IdUtils.uuid();
-        final var expectedResource = Fixture.Videos.resource(VideoMediaType.VIDEO);
+        final var expectedResource = Fixture.Videos.resource(VideoMediaType.THUMBNAIL);
+        final var expectedId = "Item";
 
-        target.storage().put(expectedName, expectedResource);
+        target.storage().put(expectedId, expectedResource);
 
         // when
-        final var actualResource = target.get(expectedName).get();
+        final var actualContent = target.get(expectedId).get();
 
         // then
-        assertEquals(expectedResource, actualResource);
+        assertEquals(expectedResource, actualContent);
+    }
+
+    @Test
+    public void givenInvalidResource_whenCallsGet_shouldRetrieveEmpty() {
+        // given
+        final var expectedResource = Fixture.Videos.resource(VideoMediaType.THUMBNAIL);
+        final var expectedId = "jajaja";
+
+        target.storage().put("item", expectedResource);
+
+        // when
+        final var actualContent = target.get(expectedId);
+
+        // then
+        assertTrue(actualContent.isEmpty());
     }
 
     @Test
