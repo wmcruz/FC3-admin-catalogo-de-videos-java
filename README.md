@@ -12,7 +12,7 @@
 <br />
 
 ### Observação:
-Este repositório tem como base o repo criado pelo professor G Suak no repo do codeedu/fullcycle. [Repo](https://github.com/codeedu/micro-admin-videos-java/tree/master)
+Este repositório tem como base o repo criado pelo professor G Suak no repo do codeedu/fullcycle. [Repo](https://github.com/devfullcycle/FC3-admin-catalogo-de-videos-java)
 
 ## Ferramentas necessárias
 
