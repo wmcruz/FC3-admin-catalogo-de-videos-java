@@ -98,8 +98,8 @@ public class CreateVideoUseCaseTest extends UseCaseTest {
                 asString(expectedGenres),
                 asString(expectedMembers),
                 expectedVideo,
-                expectedBanner,
                 expectedTrailer,
+                expectedBanner,
                 expectedThumb,
                 expectedThumbHalf
         );
@@ -138,10 +138,10 @@ public class CreateVideoUseCaseTest extends UseCaseTest {
                                 && Objects.equals(expectedGenres, actualVideo.getGenres())
                                 && Objects.equals(expectedMembers, actualVideo.getCastMembers())
                                 && Objects.equals(expectedVideo.name(), actualVideo.getVideo().get().name())
-//                                && Objects.equals(expectedTrailer.name(), actualVideo.getTrailer().get().name())
-//                        && Objects.equals(expectedBanner.name(), actualVideo.getBanner().get().name())
-//                        && Objects.equals(expectedThumb.name(), actualVideo.getThumbnail().get().name())
-//                        && Objects.equals(expectedThumbHalf.name(), actualVideo.getThumbnailHalf().get().name())
+                                && Objects.equals(expectedTrailer.name(), actualVideo.getTrailer().get().name())
+                        && Objects.equals(expectedBanner.name(), actualVideo.getBanner().get().name())
+                        && Objects.equals(expectedThumb.name(), actualVideo.getThumbnail().get().name())
+                        && Objects.equals(expectedThumbHalf.name(), actualVideo.getThumbnailHalf().get().name())
         ));
     }
 
